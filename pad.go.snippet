@@ -1,0 +1,20 @@
+// Pad with the standard repeating bytes to block size 16 as PKCS#5 does
+func pad(src []byte) []byte {
+	oversize := block_size - (len(src) % block_size)
+	newsize := len(src) + oversize
+	result := make([]byte, newsize, newsize)
+	copy(result, src)
+	b := make([]byte, intSize)
+	switch intSize {
+	case 64 / 8:
+		binary.BigEndian.PutUint64(b, uint64(oversize))
+	case 32 / 8:
+		binary.BigEndian.PutUint32(b, uint32(oversize))
+	default:
+		panic("unknown intSize")
+	}
+	for i := len(src); i < (len(src) + oversize); i++ {
+		result[i] = b[intSize-1]
+	}
+	return result
+}

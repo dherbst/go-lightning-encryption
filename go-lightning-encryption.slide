@@ -1,0 +1,50 @@
+Using Encryption with Go
+Lightning talk at GoLangPhilly
+11 Nov 2014
+Tags: golang, go, encryption
+
+Darrel Herbst
+DramaFever.com
+http://github.com/dherbst
+@darrelherbst
+
+* Disclaimer - I'm not an encryption expert, I've just had to use AES a few times, this isn't production ready code
+
+When you want to encrypt something in go take a look at http://golang.org/pkg/crypto/aes/
+
+The summary is:
+
+- Take your plaintext data
+- Pad your data so it is equivalent to your aes.BlockSize
+- Create a byte array to hold the encrypted text
+- Create a salt (iv)
+- Encrypt your text
+- Encode your encrypted bytes to base64 so you can transmit it easily
+
+* Take your plaintext and pad it so it is the right block size
+
+.code plaintext.go.snippet
+
+Now let's look at the pad function...
+
+
+* Pad the plaintext
+
+.code pad.go.snippet
+
+* Create a byte array to hold the encrypted content
+
+.code encryptit.go.snippet
+
+
+* And here it is in enc.go
+
+.code enc.go /START OMIT1/,/END OMIT1/
+
+* the rest of enc.go
+
+.code enc.go /START OMIT2/,/END OMIT2/
+
+* Output looks like
+
+.code enc.out

@@ -1,0 +1,15 @@
+// byte array to hold the encrypted bytes
+ciphertext := make([]byte, len(paddedplainbytes))
+
+// your key needs to be the right size
+block, err := aes.NewCipher(key)
+if err != nil {
+	return "", err
+}
+
+// if you use the same iv every time that is considered non-optimal
+// better to generate one randomly and encode it into the data
+mode := cipher.NewCBCEncrypter(block, iv)
+mode.CryptBlocks(ciphertext, paddedplainbytes)
+
+return base64.StdEncoding.EncodeToString(ciphertext), nil

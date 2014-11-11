@@ -1,0 +1,4 @@
+$ go run enc.go
+plain=Hello there
+paddedplainbytes=[72 101 108 108 111 32 116 104 101 114 101 5 5 5 5 5]
+encrypted=r/oKVrM1iE3coolBBqzkjw==
