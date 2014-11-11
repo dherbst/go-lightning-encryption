@@ -17,7 +17,7 @@ var (
 )
 
 func main() {
-	// START OMIT1
+	// START OMIT1 OMIT
 	// prep the plaintext by taking your string, and returning a byte array
 	plain := "Hello there"
 	plainbytes := []byte(plain)
@@ -36,16 +36,16 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error getting NewCipher %v\n", err)
 	}
-	// END OMIT1
+	// END OMIT1 OMIT
 
-	// START OMIT2
+	// START OMIT2 OMIT
 	// if you use the same iv every time that is considered non-optimal
 	// better to generate one randomly and encode it into the data
 	mode := cipher.NewCBCEncrypter(block, iv)
 	mode.CryptBlocks(ciphertext, paddedplainbytes)
 
 	fmt.Printf("encrypted=%v\n", base64.StdEncoding.EncodeToString(ciphertext))
-	// END OMIT2
+	// END OMIT2 OMIT
 }
 
 // Pad with the standard repeating bytes to block size 16 as PKCS#5 does
